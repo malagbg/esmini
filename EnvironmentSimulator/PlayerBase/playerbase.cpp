@@ -590,6 +590,10 @@ int ScenarioPlayer::Init()
 	if (opt.GetOptionArg("osi_file") ==  "on")
 	{
 		osi_file = true;
+		if (scenarioGateway->OpenOSIFile() == false)
+		{
+			osi_file = false;
+		}
 	}
 	
 	if ((arg_str = opt.GetOptionArg("osi_freq")) != "")
