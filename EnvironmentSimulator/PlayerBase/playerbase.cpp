@@ -55,6 +55,7 @@ ScenarioPlayer::ScenarioPlayer(int &argc, char *argv[]) :
 	osi_receiver_addr = "";
 	osi_file = false; 
 	osi_freq_ = 1;
+	CSV_Log = NULL;
 
 #ifdef _SCENARIO_VIEWER
 	viewerState_ = ViewerState::VIEWER_STATE_NOT_STARTED;
