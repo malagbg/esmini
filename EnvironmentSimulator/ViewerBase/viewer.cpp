@@ -671,7 +671,7 @@ Viewer::Viewer(roadmanager::OpenDrive *odrManager, const char *modelFilename, co
 	{
 		shadow_node_ = osgDB::readNodeFile(shadowFilename);
 	}
-	if (!shadow_node_)
+	if (!shadow_node_ && scenarioFilename)
 	{
 		// assume path is relative scenario directory
 		std::string shadowFilename2 = CombineDirectoryPathAndFilepath(DirNameOf(scenarioFilename), shadowFilename);
@@ -1497,8 +1497,11 @@ void Viewer::SetInfoTextProjection(int width, int height)
 void Viewer::SetVehicleInFocus(int idx)
 {
 	currentCarInFocus_ = idx;
-	rubberbandManipulator_->setTrackNode(cars_[currentCarInFocus_]->txNode_, false);
-	nodeTrackerManipulator_->setTrackNode(cars_[currentCarInFocus_]->node_);
+	if (cars_.size() > idx)
+	{
+		rubberbandManipulator_->setTrackNode(cars_[currentCarInFocus_]->txNode_, false);
+		nodeTrackerManipulator_->setTrackNode(cars_[currentCarInFocus_]->node_);
+	}
 }
 
 void Viewer::SetWindowTitle(std::string title)
